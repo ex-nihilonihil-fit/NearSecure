@@ -15,8 +15,8 @@ in the android or iOS folders will probably result in compile errors.
 - The best way to add dependencies is to call "flutter install <dependency name>"
 in the terminal, which will then allow you to call it for your methods and classes. 
 
-- It's important to check the dependency documentation at pub.dev. Many dependencies 
-require changes to the application manifest and .plist files to work.
+- It's important to check the dependency documentation at [pub.dev](https://pub.dev). 
+Many dependencies require changes to the application manifest and .plist files to work.
 
 ## Getting Started
 
