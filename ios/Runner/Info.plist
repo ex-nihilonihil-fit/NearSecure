@@ -51,6 +51,7 @@
 	<false/>
 	<key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
 	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+	<key>NFCReaderUsageDescription</key><value>This app uses the NFC to read the tags.</value>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
