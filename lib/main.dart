@@ -86,7 +86,7 @@ class MyAppState extends State<MyApp> {
                           size: 24,
                         ),
                         //showLoadingIndicator: true,
-                        onPressed: () async {
+                        onPressed: () {
                           // Listen for NFC signals
                           nfcListener.listen();
                         },
