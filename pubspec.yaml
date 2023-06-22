@@ -36,6 +36,20 @@ dependencies:
   nfc_manager: ^3.2.0
   google_maps_flutter: ^2.2.8
   path_provider: ^2.0.15
+  google_fonts: ^5.1.0
+  provider: ^6.0.0
+  json_path: ^0.6.0
+  intl: ^0.18.1
+  page_transition: ^2.0.9
+  shared_preferences: ^2.1.2
+  url_launcher: ^6.1.11
+  timeago: ^3.4.0
+  latlng: ^1.0.0
+
+
+
+
+
 
 dev_dependencies:
   flutter_test:
