@@ -412,11 +412,11 @@ class MyAppState extends State<MyApp> {
                       ),
                     ),
                     FlutterFlowIconButton(
-                      borderColor: Colors.yellow,
+                      borderColor: Color(0xFFFCDC0C),
                       borderRadius: 20,
                       borderWidth: 1,
                       buttonSize: 40,
-                      fillColor: Colors.yellow,
+                      fillColor: Color(0xFFFCDC0C),
                       icon: Icon(
                         Icons.text_snippet_rounded,
                         color: FlutterFlowTheme.of(context).primaryBtnText,
@@ -447,7 +447,7 @@ class MyAppState extends State<MyApp> {
                                   .bodyText1
                                   .override(
                                 fontFamily: 'Outfit',
-                                color: Colors.yellow,
+                                color: Color(0xFFFCDC0C),
                                 fontSize: 22,
                               ),
                             ),
@@ -468,7 +468,7 @@ class MyAppState extends State<MyApp> {
                                   .bodyText2
                                   .override(
                                 fontFamily: 'Outfit',
-                                color: Colors.yellow,
+                                color: Color(0xFFFCDC0C),
                                 fontSize: 13,
                               ),
                             ),
