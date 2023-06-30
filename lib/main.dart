@@ -29,6 +29,17 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: HomePage()
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
 
       home: Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -60,7 +71,7 @@ class MyAppState extends State<MyApp> {
                 padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 400,
-                  height: 65,
+                  height: 75,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: const [
@@ -163,7 +174,7 @@ class MyAppState extends State<MyApp> {
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 400,
-                  height: 65,
+                  height: 75,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -261,7 +272,7 @@ class MyAppState extends State<MyApp> {
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 400,
-                  height: 65,
+                  height: 75,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -361,7 +372,7 @@ class MyAppState extends State<MyApp> {
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 400,
-                  height: 65,
+                  height: 75,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -395,7 +406,7 @@ class MyAppState extends State<MyApp> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DisplayLocationData(),
+                                builder: (context) => DisplayLocationData(),
                               ),
                             );
                           },
@@ -464,7 +475,7 @@ class MyAppState extends State<MyApp> {
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 400,
-                  height: 65,
+                  height: 75,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -492,11 +503,9 @@ class MyAppState extends State<MyApp> {
                             color: FlutterFlowTheme.of(context).primaryBtnText,
                             size: 24,
                           ),
-                          onPressed: () async {
-                            // get the data from the database
-                            String data = await DatabaseDisplay().getData();
-                            // update the value of the result
-                            result.value = data;
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  DisplayLogData()));
+
                           },
                         ),
                       ),
@@ -565,7 +574,7 @@ class MyAppState extends State<MyApp> {
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 400,
-                  height: 315,
+                  height: 240,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -585,5 +594,137 @@ class MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+class DisplayLogData extends StatelessWidget {
+  DisplayLogData({Key? key}) : super(key: key);
+  var _output='';
+  Future<void> _updateText(data) async {
+    String data = await DatabaseDisplay().getData();
+    // update the value of the result
+    _output = data;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'NearSecure',
+          style: FlutterFlowTheme.of(context).title1.override(
+            fontFamily: 'Outfit',
+            color: Colors.white,
+            fontSize: 22,
+          ),
+        ),
+        actions: [],
+        centerTitle: false,
+        elevation: 2,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: 400,
+              height: 565,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primaryBackground,
+              ),
+              child: Text(
+                '$_output',
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ),
+            Expanded(
+              child: FlutterFlowIconButton(
+                borderColor: FlutterFlowTheme.of(context).primaryBackground,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 40,
+                fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                icon: Icon(
+                  Icons.keyboard_arrow_left,
+                  color: Color(0xD71E35D8),
+                  size: 34,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ); // Scaffold
+  }
+}
+
+
+class DisplayLocationData extends StatelessWidget {
+  DisplayLocationData({Key? key}) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'NearSecure',
+          style: FlutterFlowTheme.of(context).title1.override(
+            fontFamily: 'Outfit',
+            color: Colors.white,
+            fontSize: 22,
+          ),
+        ),
+        actions: [],
+        centerTitle: false,
+        elevation: 2,
+      ),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: 400,
+              height: 565,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primaryBackground,
+              ),
+              child: Text(
+                'Location Data',
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ),
+            Expanded(
+              child: FlutterFlowIconButton(
+                borderColor: FlutterFlowTheme.of(context).primaryBackground,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 40,
+                fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                icon: Icon(
+                  Icons.keyboard_arrow_left,
+                  color: Color(0xD71E35D8),
+                  size: 34,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ); // Scaffold
   }
 }
