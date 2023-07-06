@@ -29,7 +29,7 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage()
+        home: HomePage()
     );
   }
 }
@@ -43,35 +43,52 @@ class HomePage extends StatelessWidget {
 
       home: Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: const Color(0xD7394CD2),
-          automaticallyImplyLeading: false,
-          title: Align(
-            alignment: const AlignmentDirectional(-1, -1),
-            child: Text(
-              'Near Secure',
-              textAlign: TextAlign.start,
-              style: FlutterFlowTheme.of(context).title1.override(
-                fontFamily: 'Outfit',
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
-          actions: [],
-          centerTitle: false,
-          elevation: 2,
-        ),
+
         body: SafeArea(
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                child: Container(
+                  width: 410,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(
+                              'images/logo.png',
+                              width: 300,
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 75,
+                  width: 385,
+                  height: 85,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: const [
@@ -173,8 +190,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 75,
+                  width: 385,
+                  height: 85,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -271,8 +288,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 75,
+                  width: 385,
+                  height: 85,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -371,8 +388,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 75,
+                  width: 385,
+                  height: 85,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -474,8 +491,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 75,
+                  width: 385,
+                  height: 85,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -570,25 +587,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
-                child: Container(
-                  width: 400,
-                  height: 240,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4,
-                        color: Color(0x33000000),
-                        offset: Offset(0, 2),
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  alignment: AlignmentDirectional(0, 0),
-                ),
-              ),
             ],
           ),
         ),
@@ -610,29 +608,51 @@ class DisplayLogData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'NearSecure',
-          style: FlutterFlowTheme.of(context).title1.override(
-            fontFamily: 'Outfit',
-            color: Colors.white,
-            fontSize: 22,
-          ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2,
-      ),
+
       body: SafeArea(
         top: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0,0,0,0),
+              child: Container(
+                width: 410,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            'images/logo.png',
+                            width: 300,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Container(
               width: 400,
-              height: 565,
+              height: 560,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
@@ -674,29 +694,51 @@ class DisplayLocationData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'NearSecure',
-          style: FlutterFlowTheme.of(context).title1.override(
-            fontFamily: 'Outfit',
-            color: Colors.white,
-            fontSize: 22,
-          ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 2,
-      ),
+
       body: SafeArea(
         top: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0,0,0,0),
+              child: Container(
+                width: 410,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            'images/logo.png',
+                            width: 300,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Container(
               width: 400,
-              height: 565,
+              height: 560,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
