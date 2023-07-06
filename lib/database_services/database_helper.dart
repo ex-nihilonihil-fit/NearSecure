@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart' show getApplicationDocumentsDi
 
 class DatabaseHelper {
 
-  final DatabaseHelper databaseHelper= DatabaseHelper();
+  //final DatabaseHelper databaseHelper= DatabaseHelper();
 
   static const _databaseName = "database.db";
   static const _databaseVersion = 1;
