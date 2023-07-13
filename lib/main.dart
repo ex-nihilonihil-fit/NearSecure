@@ -595,10 +595,24 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class DisplayLogData extends StatelessWidget {
+class DisplayLogData extends StatefulWidget {
   DisplayLogData({Key? key}) : super(key: key);
+
+  @override
+  State<DisplayLogData> createState() => _DisplayLogData();
+}
+ class _DisplayLogData extends State<DisplayLogData> {
+
   var _output='';
-  Future<void> _updateText(data) async {
+
+  @override
+  void initState() {
+    super.initState();
+    updateText();
+
+  }
+
+  Future<void> updateText() async {
     String data = await DatabaseDisplay().getData();
     // update the value of the result
     _output = data;
@@ -683,9 +697,8 @@ class DisplayLogData extends StatelessWidget {
       ),
     ); // Scaffold
   }
+
 }
-
-
 class DisplayLocationData extends StatelessWidget {
   DisplayLocationData({Key? key}) : super(key: key);
 
