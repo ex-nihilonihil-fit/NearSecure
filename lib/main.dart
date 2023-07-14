@@ -325,7 +325,7 @@ class HomePage extends StatelessWidget {
                             padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
                             child: Container(
                               width: 112,
-                              height: 50,
+                              height: 55,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -357,7 +357,7 @@ class HomePage extends StatelessWidget {
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0, -1),
+                              alignment: AlignmentDirectional(1, -1),
                               child: Text(
                                 'Turn off NFC Services',
                                 style: FlutterFlowTheme.of(context)
@@ -428,7 +428,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           Container(
                             width: 168,
-                            height: 50,
+                            height: 55,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -459,7 +459,7 @@ class HomePage extends StatelessWidget {
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(-1, -1),
+                              alignment: AlignmentDirectional(1, -1),
                               child: Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
@@ -527,16 +527,16 @@ class HomePage extends StatelessWidget {
                         children: [
                           Container(
                             width: 110,
-                            height: 50,
+                            height: 59,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(1, 1),
+                              alignment: AlignmentDirectional(-1,1),
                               child: Padding(
                                 padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(17, 0, 0, 0),
                                 child: Text(
                                   'Logs',
                                   style: FlutterFlowTheme.of(context)
@@ -553,16 +553,16 @@ class HomePage extends StatelessWidget {
                           ),
                           Container(
                             width: 150,
-                            height: 17,
+                            height: 25,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(1, -1),
+                              alignment: AlignmentDirectional(-1,1),
                               child: Padding(
                                 padding:
-                                EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
                                 child: Text(
                                   'Display of Data',
                                   style: FlutterFlowTheme.of(context)
