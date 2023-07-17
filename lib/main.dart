@@ -7,6 +7,10 @@ import 'flutter_flow/flutter_flow_icon_button.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
+import 'package:latlong2/latlong.dart';
+
 
 
 var nfcListener = NFCListener();
@@ -42,7 +46,7 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
 
       home: Scaffold(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).lineColor,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(175),
           child: AppBar(
@@ -412,12 +416,7 @@ class HomePage extends StatelessWidget {
                           ),
                           onPressed: () {
                             // navigate to the DisplayLocationData view
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DisplayLocationData(),
-                              ),
-                            );
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  DisplayLocation()));
                           },
                         ),
                       ),
@@ -617,71 +616,62 @@ class _DisplayLogData extends State<DisplayLogData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-
+      backgroundColor: FlutterFlowTheme.of(context).lineColor,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(120),
+        child: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).lineColor,
+          automaticallyImplyLeading: false,
+          actions: [],
+          flexibleSpace: FlexibleSpaceBar(
+            background: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'images/logo.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          centerTitle: false,
+        ),
+      ),
       body: SafeArea(
         top: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0,0,0,0),
+              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
               child: Container(
-                width: 410,
-                height: 150,
+                width: 400,
+                height: 570,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color:
-                        FlutterFlowTheme.of(context).secondaryBackground,
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'images/logo.png',
-                            width: 300,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 2),
+                    )
                   ],
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ),
-            ),
-            Container(
-              width: 400,
-              height: 560,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              child: Text(
-                '$_output',
-                style: FlutterFlowTheme.of(context).bodyText1,
               ),
             ),
             Expanded(
               child: FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).primaryBackground,
+                borderColor: FlutterFlowTheme.of(context).lineColor,
                 borderRadius: 30,
                 borderWidth: 1,
                 buttonSize: 40,
-                fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                fillColor: FlutterFlowTheme.of(context).lineColor,
                 icon: Icon(
                   Icons.keyboard_arrow_left,
                   color: Color(0xD71E35D8),
-                  size: 34,
+                  size: 30,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -695,78 +685,75 @@ class _DisplayLogData extends State<DisplayLogData> {
   }
 
 }
-class DisplayLocationData extends StatelessWidget {
-  DisplayLocationData({Key? key}) : super(key: key);
+
+class DisplayLocation extends StatefulWidget {
+
+  DisplayLocation({Key? key}) : super(key: key);
+  @override
+  State<DisplayLocation> createState() => _DisplayLocation();
+}
+class _DisplayLocation extends State<DisplayLocation>  {
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-
+      backgroundColor: FlutterFlowTheme.of(context).lineColor,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(120),
+        child: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).lineColor,
+          automaticallyImplyLeading: false,
+          actions: [],
+          flexibleSpace: FlexibleSpaceBar(
+            background: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'images/logo.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          centerTitle: false,
+        ),
+      ),
       body: SafeArea(
         top: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0,0,0,0),
+              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
               child: Container(
-                width: 410,
-                height: 150,
+                width: 400,
+                height: 570,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color:
-                        FlutterFlowTheme.of(context).secondaryBackground,
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'images/logo.png',
-                            width: 300,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 2),
+                    )
                   ],
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ),
-            ),
-            Container(
-              width: 400,
-              height: 560,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
-              ),
-              child: Text(
-                'Location Data',
-                style: FlutterFlowTheme.of(context).bodyText1,
               ),
             ),
             Expanded(
               child: FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).primaryBackground,
+                borderColor: FlutterFlowTheme.of(context).lineColor,
                 borderRadius: 30,
                 borderWidth: 1,
                 buttonSize: 40,
-                fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                fillColor: FlutterFlowTheme.of(context).lineColor,
                 icon: Icon(
                   Icons.keyboard_arrow_left,
                   color: Color(0xD71E35D8),
-                  size: 34,
+                  size: 30,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
