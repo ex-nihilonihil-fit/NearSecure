@@ -697,10 +697,9 @@ class DisplayLocation extends StatefulWidget {
 }
 class _DisplayLocation extends State<DisplayLocation>  {
 
-  final PopupController _popupController = PopupController();
-  MapController _mapController = MapController();
+  MapController _mController = MapController();
   double _zoom = 10;
-  List<LatLng> _latLngList = [
+  List<LatLng> _latLongList = [
     LatLng(37, -121),
     LatLng(37.02, -121.51),
     LatLng(37.05, -121.53),
@@ -709,11 +708,11 @@ class _DisplayLocation extends State<DisplayLocation>  {
     LatLng(37.07, -121.55),
     LatLng(37.1, -121.5342),
   ];
-  List<Marker> _markers = [];
+  List<Marker> _markerList = [];
 
   @override
   void initState() {
-    _markers = _latLngList
+    _markerList = _latLongList
         .map((point) => Marker(
       point: point,
       width: 60,
@@ -754,10 +753,10 @@ class _DisplayLocation extends State<DisplayLocation>  {
         ),
       ),
       body: FlutterMap(
-        mapController: _mapController,
+        mapController: _mController,
         options: MapOptions(
-          center: _latLngList[0],
-          bounds: LatLngBounds.fromPoints(_latLngList),
+          center: _latLongList[0],
+          bounds: LatLngBounds.fromPoints(_latLongList),
           zoom: _zoom,
         ),
         nonRotatedChildren: [
@@ -782,7 +781,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
             fitBoundsOptions: FitBoundsOptions(
               padding: EdgeInsets.all(50),
             ),
-            markers: _markers,
+            markers: _markerList,
             polygonOptions: PolygonOptions(
                 borderColor: Colors.blueAccent,
                 color: Colors.black12,
