@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rf_block/database_services/database_display.dart';
 import 'package:rf_block/nfc_services/nfc_listener.dart';
 import 'package:rf_block/nfc_services/nfc_transmitter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'location_services/display_location_data.dart';
 import 'flutter_flow/flutter_flow_icon_button.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/plugin_api.dart';
+
 
 
 
@@ -618,16 +621,16 @@ class _DisplayLogData extends State<DisplayLogData> {
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).lineColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
+        preferredSize: Size.fromHeight(110),
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).lineColor,
           automaticallyImplyLeading: false,
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
             background: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+              padding: EdgeInsetsDirectional.fromSTEB(2, 5, 2, 0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
                   'images/logo.png',
                   fit: BoxFit.cover,
@@ -690,26 +693,56 @@ class DisplayLocation extends StatefulWidget {
 
   DisplayLocation({Key? key}) : super(key: key);
   @override
-  State<DisplayLocation> createState() => _DisplayLocation();
+  _DisplayLocation createState() => _DisplayLocation();
 }
 class _DisplayLocation extends State<DisplayLocation>  {
 
+  final PopupController _popupController = PopupController();
+  MapController _mapController = MapController();
+  double _zoom = 10;
+  List<LatLng> _latLngList = [
+    LatLng(37, -121),
+    LatLng(37.02, -121.51),
+    LatLng(37.05, -121.53),
+    LatLng(37.055, -121.54),
+    LatLng(37.059, -121.55),
+    LatLng(37.07, -121.55),
+    LatLng(37.1, -121.5342),
+  ];
+  List<Marker> _markers = [];
+
+  @override
+  void initState() {
+    _markers = _latLngList
+        .map((point) => Marker(
+      point: point,
+      width: 60,
+      height: 60,
+      builder: (context) => Icon(
+        Icons.pin_drop,
+        size: 60,
+        color: Colors.blueAccent,
+      ),
+    ))
+        .toList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).lineColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
+        preferredSize: Size.fromHeight(110),
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).lineColor,
           automaticallyImplyLeading: false,
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
             background: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+              padding: EdgeInsetsDirectional.fromSTEB(2, 5, 2, 0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
                   'images/logo.png',
                   fit: BoxFit.cover,
@@ -720,49 +753,51 @@ class _DisplayLocation extends State<DisplayLocation>  {
           centerTitle: false,
         ),
       ),
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
-              child: Container(
-                width: 400,
-                height: 570,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 4,
-                      color: Color(0x33000000),
-                      offset: Offset(0, 2),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            Expanded(
-              child: FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).lineColor,
-                borderRadius: 30,
-                borderWidth: 1,
-                buttonSize: 40,
-                fillColor: FlutterFlowTheme.of(context).lineColor,
-                icon: Icon(
-                  Icons.keyboard_arrow_left,
-                  color: Color(0xD71E35D8),
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ],
+      body: FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(
+          center: _latLngList[0],
+          bounds: LatLngBounds.fromPoints(_latLngList),
+          zoom: _zoom,
         ),
+        nonRotatedChildren: [
+          RichAttributionWidget(
+            attributions: [
+              TextSourceAttribution(
+                'OpenStreetMap contributors',
+                onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+              ),
+            ],
+          ),
+        ],
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            //userAgentPackageName: 'com.example.app',
+          ),
+          MarkerClusterLayerWidget(options: MarkerClusterLayerOptions(
+            maxClusterRadius: 190,
+            disableClusteringAtZoom: 16,
+            size: Size(50, 50),
+            fitBoundsOptions: FitBoundsOptions(
+              padding: EdgeInsets.all(50),
+            ),
+            markers: _markers,
+            polygonOptions: PolygonOptions(
+                borderColor: Colors.blueAccent,
+                color: Colors.black12,
+                borderStrokeWidth: 3),
+            builder: (context, markers) {
+              return Container(
+                alignment: Alignment.center,
+                decoration:
+                BoxDecoration(color: Color(0xFF1CA8F1), shape: BoxShape.circle),
+                child: Text('${markers.length}'),
+              );
+            },
+          ),)
+        ],
       ),
-    ); // Scaffold
+    );
   }
 }
