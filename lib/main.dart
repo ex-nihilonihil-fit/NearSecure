@@ -3,6 +3,7 @@ import 'package:rf_block/database_services/database_display.dart';
 import 'package:rf_block/nfc_services/nfc_listener.dart';
 import 'package:rf_block/nfc_services/nfc_transmitter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'database_services/database_helper.dart';
 import 'location_services/display_location_data.dart';
 import 'flutter_flow/flutter_flow_icon_button.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -116,6 +117,7 @@ class HomePage extends StatelessWidget {
                             //showLoadingIndicator: true,
                             onPressed: () {
                               // Listen for NFC signals
+                              DatabaseHelper().insert('test data' as String, 35 as int);
                               nfcListener.listen();
                             },
                           ),
@@ -517,6 +519,7 @@ class HomePage extends StatelessWidget {
                             size: 26,
                           ),
                           onPressed: () {
+
                             Navigator.push(context, MaterialPageRoute(builder: (context) =>  DisplayLogData()));
 
                           },
@@ -601,19 +604,18 @@ class DisplayLogData extends StatefulWidget {
 }
 class _DisplayLogData extends State<DisplayLogData> {
 
-  var _output='';
-
+  List<String> _logs = [];
   @override
-  void initState() {
+  initState(){
+    _updateLog();
     super.initState();
-    updateText();
-
   }
 
-  Future<void> updateText() async {
+  Future<void> _updateLog() async {
     String data = await DatabaseDisplay().getData();
-    // update the value of the result
-    _output = data;
+    setState((){
+      _logs = data.split('\n');
+    });
   }
 
   @override
@@ -641,48 +643,16 @@ class _DisplayLogData extends State<DisplayLogData> {
           centerTitle: false,
         ),
       ),
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
-              child: Container(
-                width: 400,
-                height: 570,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 4,
-                      color: Color(0x33000000),
-                      offset: Offset(0, 2),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+      body: _logs==null ? Container():ListView.builder(
+        itemCount: _logs.length,
+        itemBuilder: (_, int position) {
+          return Card(
+            child: ListTile(
+              title:
+              Text(_logs[position]),
             ),
-            Expanded(
-              child: FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).lineColor,
-                borderRadius: 30,
-                borderWidth: 1,
-                buttonSize: 40,
-                fillColor: FlutterFlowTheme.of(context).lineColor,
-                icon: Icon(
-                  Icons.keyboard_arrow_left,
-                  color: Color(0xD71E35D8),
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     ); // Scaffold
   }
