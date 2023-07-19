@@ -44,6 +44,9 @@ dependencies:
   shared_preferences: ^2.1.2
   url_launcher: ^6.1.11
   timeago: ^3.4.0
+  latlong2: ^0.8.1
+  flutter_map: any
+  flutter_map_marker_cluster: any
   latlng: ^1.0.0
 
 
