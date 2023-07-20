@@ -1,43 +1,39 @@
-import 'package:nfc_manager/nfc_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:ndef/ndef.dart' as ndef;
 import 'package:rf_block/nfc_services/random_data.dart';
 import 'package:rf_block/database_services/database_helper.dart';
 import 'package:rf_block/location_services/location_data.dart';
 import 'dart:async';
 
 class NFCTransmitter {
-  final NfcManager _nfcManager = NfcManager.instance;
+  get urlRecords => null;
+
 
   Future<void> transmit() async {
-      // Start the session
-      await _nfcManager.startSession(
-        onDiscovered: (NfcTag tag) async {
-          // Create an instance of Ndef
-          Ndef? ndef = Ndef.from(tag);
+    var availability = await FlutterNfcKit.nfcAvailability;
+    if (availability != NFCAvailability.available) {
+      print('NFC is not available on this device');
+      return;
+    }
+    // listen for any tag and get the tag data when it's tapped.
+    var tag = await FlutterNfcKit.poll(androidCheckNDEF: false);
+    print('data: $tag'); //TODO: Remove this line
 
-          if (ndef == null) { // If the tag is not compatible with NDEF
-            print('Tag is not compatible with NDEF'); //TODO: Remove this line
-            return;
-          }
-
-          // Write the data to the tag (send a signal)
-          await ndef.write(NdefMessage([
-            // write a random 32 bit number to the tag
-            NdefRecord.createText(RandomData().getRandom32Bits().toString())
-          ]));
-
-          // Read the data from the tag
-          var data = await ndef.read();
-          // Get the location data.
-          var location = await LocationData().getLocation();
-          // Write the data to the database.
-          DatabaseHelper().insert(data as String, location as int);
-        },
-      );
+    // if a tag is found, write random data to it
+    var randomNumber = RandomData().getRandom32Bits();
+    // write the random string to the tag
+    await FlutterNfcKit.writeNDEFRecords([ndef.UriRecord.fromString(randomNumber.toString())]);
+    print('random number: $randomNumber written to tag'); //TODO: Remove this line
+    // Get the location data.
+    var location = await LocationData().getLocation();
+    print('location: $location'); //TODO: Remove this line
+    // Write the data to the database.
+    DatabaseHelper().insert(tag as String, location as int);
   }
 
-  void stop() async {
-    // Close the session
-    _nfcManager.stopSession();
+  // close the session
+  Future<void> stop() async {
+    await FlutterNfcKit.finish();
   }
-
 }

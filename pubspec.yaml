@@ -45,6 +45,8 @@ dependencies:
   url_launcher: ^6.1.11
   timeago: ^3.4.0
   latlng: ^1.0.0
+  flutter_nfc_kit: ^3.3.1
+  ndef: ^0.3.1
 
 
 
