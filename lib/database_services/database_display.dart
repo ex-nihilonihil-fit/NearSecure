@@ -11,7 +11,7 @@ class DatabaseDisplay {
     // convert the data to a string
     String output = '';
     for (int i = 0; i < list.length; i++) {
-      output += list[i]['rawData'] + '\n';
+      output += list[i]['rawData'] + ',' + 'Location - ' + list[i]['loc'].toString() + '\n';
     }
     // return the data
     return output;
