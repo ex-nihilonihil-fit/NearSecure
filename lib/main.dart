@@ -117,7 +117,6 @@ class HomePage extends StatelessWidget {
                             //showLoadingIndicator: true,
                             onPressed: () {
                               // Listen for NFC signals
-                              DatabaseHelper().insert('test data' as String, 35 as int);
                               nfcListener.listen();
                             },
                           ),
