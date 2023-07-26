@@ -6,18 +6,18 @@ import 'dart:io' show Directory;
 import 'package:path/path.dart' show join;
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart' show getApplicationDocumentsDirectory;
+import 'dart:async';
 
 class DatabaseHelper {
-
-  //final DatabaseHelper databaseHelper= DatabaseHelper();
 
   static const _databaseName = "database.db";
   static const _databaseVersion = 1;
 
   static const table = 'nfc_events';
 
+  static const columnTime = 'time';
   static const columnId = 'id';
-  static const columnRawData = 'rawData';
+  static const columnNfcData = 'nfcData';
   static const columnLoc = 'loc';
 
   // only have a single app-wide reference to the database
@@ -35,7 +35,6 @@ class DatabaseHelper {
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
-    // print(path); TODO: remove this line
     return await openDatabase(path,
         version: _databaseVersion,
         onCreate: _onCreate);
@@ -45,51 +44,69 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (
-            $columnId INTEGER PRIMARY KEY,
-            $columnRawData TEXT NOT NULL,
-            $columnLoc INTEGER NOT NULL
+            $columnTime VARCHAR(50) NOT NULL,
+            $columnId VARCHAR(50) NOT NULL,
+            $columnNfcData VARCHAR(50) NOT NULL,
+            $columnLoc VARCHAR(50) NOT NULL
           )
           ''');
   }
 
-    // Helper methods
+  //*** Helper methods ***//
 
-    // Add the raw and location data to the database in a new sequential row.
-    Future<int> insert(String rawData, int loc) async {
-      Database? db = await database;
-      return await db!.insert(
-          table, {columnRawData: rawData, columnLoc: loc});
-    }
+  // Add time, NFC data, and location data to the database in a new sequential row.
+  Future<int> insert(String time, String id, String nfcData, String loc) async {
+    Database? db = await database;
+    // get the current time without seconds and milliseconds
+    Map<String, dynamic> row = {
+      columnTime: time,
+      columnId: id,
+      columnNfcData: nfcData,
+      columnLoc: loc
+    };
+    return await db!.insert(table, row);
+  }
 
-    // Get all of the data from the database.
-    Future<List<Map<String, dynamic>>> queryAllRows() async {
-      Database? db = await database;
-      return await db!.query(table);
-    }
+  // Get all of the data from the database.
+  Future<List<Map<String, dynamic>>> queryAllRows() async {
+    Database? db = await database;
+    return await db!.query(table);
+  }
 
-    // Query the raw data column for a specified string.
-    Future<List<Map<String, dynamic>>> queryRawData(String rawData) async {
-      Database? db = await database;
-      return await db!.query(table, where: '$columnRawData = ?', whereArgs: [rawData]);
-    }
+  // Query the raw data column for a specified string.
+  Future<List<Map<String, dynamic>>> queryNfcData(String nfcData) async {
+    Database? db = await database;
+    return await db!.query(table, where: '$columnNfcData = ?', whereArgs: [nfcData]);
+  }
 
-    // Perform a raw query on the database.
-    Future<List<Map<String, dynamic>>> rawQuery(String query) async {
-      Database? db = await database;
-      return await db!.rawQuery(query);
-    }
+  // Perform a raw query on the database.
+  Future<List<Map<String, dynamic>>> rawQuery(String query) async {
+    Database? db = await database;
+    return await db!.rawQuery(query);
+  }
 
+  // Get the data from only the time, id, and nfcData columns.
+  Future<List<Map<String, dynamic>>> queryTimeIdNfcData() async {
+    Database? db = await database;
+    return await db!.query(table, columns: [columnTime, columnId, columnNfcData]);
+  }
 
-    // Get the data from the database in a specific row.
-    Future<List<Map<String, dynamic>>> queryRow(int id) async {
-      Database? db = await database;
-      return await db!.query(table, where: '$columnId = ?', whereArgs: [id]);
-    }
+  // Get the data from only the location column.
+  Future<List<Map<String, dynamic>>> queryLoc() async {
+    Database? db = await database;
+    return await db!.query(table, columns: [columnLoc]);
+  }
 
-    // Delete the database
-    Future<int> delete(int id) async {
-      Database? db = await database;
-      return await db!.delete(table, where: '$columnId = ?', whereArgs: [id]);
-    }
+  // Get the data from the database in a specific row.
+  Future<List<Map<String, dynamic>>> queryRow(int id) async {
+    Database? db = await database;
+    return await db!.query(table, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  // Delete the database
+  Future<int> delete() async {
+    Database? db = await database;
+    return await db!.delete(table, where: '$columnId = ?', whereArgs: [1]);
+  }
 }
 

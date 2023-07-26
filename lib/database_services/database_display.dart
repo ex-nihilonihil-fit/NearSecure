@@ -7,13 +7,14 @@ class DatabaseDisplay {
     // get a reference to the database
     var db = DatabaseHelper();
     // get the data from the database
-    List<Map> list = await db.rawQuery('SELECT * FROM nfc_events');
-    // convert the data to a string
+    List<Map> list = await db.queryTimeIdNfcData();
+    //convert the data to a string
     String output = '';
     for (int i = 0; i < list.length; i++) {
-      output += list[i]['rawData'] + '\n';
-    }
-    // return the data
+       output = '$output${list[i]}\n';
+      }
+    print('output: $output');
+    //return the data
     return output;
   }
 }
