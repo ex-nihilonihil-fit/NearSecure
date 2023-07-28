@@ -90,7 +90,13 @@ class DatabaseHelper {
     Database? db = await database;
     return await db!.query(table, columns: [columnTime, columnId, columnNfcData]);
   }
-
+  
+  // Get the data from only the time, Loc, and nfcData columns.
+  Future<List<Map<String, dynamic>>> queryTimeLocNfcData() async {
+    Database? db = await database;
+    return await db!.query(table, columns: [columnTime, columnLoc, columnNfcData]);
+  }
+  
   // Get the data from only the location column.
   Future<List<Map<String, dynamic>>> queryLoc() async {
     Database? db = await database;
