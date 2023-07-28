@@ -31,7 +31,7 @@ class NFCListener {
     var time = DateTime.now().toString().substring(0, 16);
     print('time: $time'); //TODO: Remove this line
     // Write the data to the database.
-    DatabaseHelper().insert(time, id, nfcData, location);
+    DatabaseHelper().insert(time.replaceAll(' ', '@'), id, nfcData.replaceAll(',', ''), location.replaceAll(',', ''));
   }
 
   // close the session
