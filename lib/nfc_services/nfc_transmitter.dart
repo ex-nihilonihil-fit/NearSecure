@@ -15,7 +15,7 @@ class NFCTransmitter {
       //display the error
       print('NFC is not available on this device'); //TODO: Remove this line
     } else {
-      print('NFC listener started'); //TODO: Remove this line
+      print('NFC Transmitter started'); //TODO: Remove this line
     }
     // listen for any tag and get the tag data when it's tapped.
     var tag = await FlutterNfcKit.poll(timeout: Duration(seconds: 240));
