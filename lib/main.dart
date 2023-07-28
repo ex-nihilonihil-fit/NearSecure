@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).lineColor,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: Size.fromHeight(150),
           child: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).lineColor,
             automaticallyImplyLeading: false,
@@ -117,7 +117,6 @@ class HomePage extends StatelessWidget {
                             //showLoadingIndicator: true,
                             onPressed: () {
                               // Listen for NFC signals
-                              //DatabaseHelper().queryAllRows();
                               nfcListener.listen();
                             },
                           ),
@@ -138,7 +137,8 @@ class HomePage extends StatelessWidget {
                             child: Align(
                               alignment: AlignmentDirectional(-1, 1),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(15, 15, 0, 0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    15, 15, 0, 0),
                                 child: Text(
                                   'NFC Scan',
                                   style: FlutterFlowTheme.of(context)
@@ -769,4 +769,3 @@ class _DisplayLocation extends State<DisplayLocation>  {
     );
   }
 }
-
