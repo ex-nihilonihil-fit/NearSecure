@@ -7,7 +7,7 @@ class DatabaseDisplay {
     // get a reference to the database
     var db = DatabaseHelper();
     // get the data from the database
-    List<Map> list = await db.queryTimeIdNfcData();
+    List<Map> list = await db.queryTimeLocNfcData();
     //convert the data to a string
     String output = '';
     for (int i = 0; i < list.length; i++) {
