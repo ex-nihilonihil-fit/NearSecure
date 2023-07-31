@@ -665,34 +665,32 @@ class DisplayLocation extends StatefulWidget {
   _DisplayLocation createState() => _DisplayLocation();
 }
 class _DisplayLocation extends State<DisplayLocation>  {
+  
+  List<LatLng> locations = [];
+  Future<List<LatLng>> getLocation() async {
+    // get the data from the database
+    List<Map> list = await databaseHelper.queryLoc();
+    String data = '';
+    List<String> locs = [];
+    // convert the data to a list of LatLng objects
+    for (int i = 0; i < list.length; i++) {
+      data = '$data${list[i]}\n';
+    }
+    locs = data.split('\n');
+    for (int j = 0; j < (locs.length - 1); j++) {
+      List<String> temp = locs[j].split(' ');
+      locations.add(LatLng(double.parse(temp[1]), double.parse(temp[2].replaceAll('}', ''))));
+    }
+    // return the data
+    return locations;
+  }
 
   MapController _mController = MapController();
-  double _zoom = 10;
-  List<LatLng> _latLongList = [
-    LatLng(37, -121),
-    LatLng(37.02, -121.51),
-    LatLng(37.05, -121.53),
-    LatLng(37.055, -121.54),
-    LatLng(37.059, -121.55),
-    LatLng(37.07, -121.55),
-    LatLng(37.1, -121.5342),
-  ];
   List<Marker> _markerList = [];
 
   @override
   void initState() {
-    _markerList = _latLongList
-        .map((point) => Marker(
-      point: point,
-      width: 60,
-      height: 60,
-      builder: (context) => Icon(
-        Icons.pin_drop,
-        size: 60,
-        color: Colors.blueAccent,
-      ),
-    ))
-        .toList();
+    getLocation();
     super.initState();
   }
 
@@ -721,27 +719,36 @@ class _DisplayLocation extends State<DisplayLocation>  {
           centerTitle: false,
         ),
       ),
-      body: FlutterMap(
+      body: displayLocationData()
+    );
+  }
+  Widget displayLocationData() {
+    if(locations.length == 0) {
+      return FlutterMap(
         mapController: _mController,
         options: MapOptions(
-          center: _latLongList[0],
-          bounds: LatLngBounds.fromPoints(_latLongList),
-          zoom: _zoom,
+          center: LatLng(37.354107, -121.955238),
+          //bounds: LatLngBounds.fromPoints(LatLng(37.8199, 122.4783)),
+          zoom: 10,
         ),
-        nonRotatedChildren: [
-          RichAttributionWidget(
-            attributions: [
-              TextSourceAttribution(
-                'OpenStreetMap contributors',
-                onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-              ),
-            ],
-          ),
-        ],
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             //userAgentPackageName: 'com.example.app',
+          ),
+        ],
+      );
+    } else {
+      return FlutterMap(
+        mapController: _mController,
+        options: MapOptions(
+          center: locations[0],
+          bounds: LatLngBounds.fromPoints(locations),
+          zoom: 3,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           ),
           MarkerClusterLayerWidget(options: MarkerClusterLayerOptions(
             maxClusterRadius: 190,
@@ -750,7 +757,18 @@ class _DisplayLocation extends State<DisplayLocation>  {
             fitBoundsOptions: FitBoundsOptions(
               padding: EdgeInsets.all(50),
             ),
-            markers: _markerList,
+            markers: locations.map((point) =>
+                Marker(
+                  point: point,
+                  width: 60,
+                  height: 60,
+                  builder: (context) =>
+                      Icon(
+                        Icons.pin_drop,
+                        size: 60,
+                        color: Colors.blueAccent,
+                      ),
+                )).toList(),
             polygonOptions: PolygonOptions(
                 borderColor: Colors.blueAccent,
                 color: Colors.black12,
@@ -765,7 +783,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
             },
           ),)
         ],
-      ),
-    );
+      );
+    }
   }
 }
