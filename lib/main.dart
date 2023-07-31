@@ -744,7 +744,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
         options: MapOptions(
           center: locations[0],
           bounds: LatLngBounds.fromPoints(locations),
-          zoom: 3,
+          zoom: 10,
         ),
         children: [
           TileLayer(
