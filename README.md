@@ -1,4 +1,4 @@
-# NearSecure
+![alt text](https://github.com/ex-nihilonihil-fit/NearSecure/blob/master/images/logo_cropped.png)
 
 Near Field Communication (NFC) technology has become increasingly prevalent in modern digital devices, enabling seamless data exchange over short distances. While this convenience has transformed various aspects of daily life, it has also exposed users to potential cyber threats. Cybercriminals can exploit NFC vulnerabilities, such as relay attacks, replay attacks, man-in-the-middle (MITM) attacks, eavesdropping, and using NFC as a steppingstone for further hacking and malware activities. Such attacks can compromise users' privacy, track their movements, steal personal information (PII), and even take control of their devices.
 
