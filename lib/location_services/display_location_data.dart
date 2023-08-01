@@ -89,7 +89,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
             options: MapOptions(
               center: snapshot.data![0],
               //bounds: LatLngBounds.fromPoints(snapshot.data!),
-              zoom: 50.0,
+              zoom: 3.0,
             ),
             children: [
               TileLayer(
