@@ -684,7 +684,7 @@ class DisplayLocation extends StatefulWidget {
 }
 class _DisplayLocation extends State<DisplayLocation>  {
 
-  List<LatLng> locations = [];
+  List<LatLng> locations = [LatLng(37.354107, -121.955238)];
   Future<List<LatLng>> getLocation() async {
     // get the data from the database
     List<Map> list = await databaseHelper.queryLoc();
@@ -699,6 +699,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
       List<String> temp = locs[j].split(' ');
       locations.add(LatLng(double.parse(temp[1]), double.parse(temp[2].replaceAll('}', ''))));
     }
+    locations.removeAt(0);
     // return the data
     return locations;
   }
@@ -741,67 +742,92 @@ class _DisplayLocation extends State<DisplayLocation>  {
     );
   }
   Widget displayLocationData() {
-    if(locations.length == 0) {
-      return FlutterMap(
-        mapController: _mController,
-        options: MapOptions(
-          center: LatLng(37.354107, -121.955238),
-          //bounds: LatLngBounds.fromPoints(LatLng(37.8199, 122.4783)),
-          zoom: 10,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            //userAgentPackageName: 'com.example.app',
-          ),
-        ],
-      );
-    } else {
-      return FlutterMap(
-        mapController: _mController,
-        options: MapOptions(
-          center: locations[0],
-          bounds: LatLngBounds.fromPoints(locations),
-          zoom: 10,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          ),
-          MarkerClusterLayerWidget(options: MarkerClusterLayerOptions(
-            maxClusterRadius: 190,
-            disableClusteringAtZoom: 16,
-            size: Size(50, 50),
-            fitBoundsOptions: FitBoundsOptions(
-              padding: EdgeInsets.all(50),
+    return FutureBuilder(
+      future: getLocation(),
+
+      builder: (BuildContext context, AsyncSnapshot<List<LatLng>> snapshot) {
+        if (snapshot.hasData) {
+          return FlutterMap(
+            mapController: _mController,
+            options: MapOptions(
+              center: snapshot.data![0],
+              bounds: LatLngBounds.fromPoints(snapshot.data!),
+              zoom: 3,
             ),
-            markers: locations.map((point) =>
-                Marker(
+            nonRotatedChildren: [
+              RichAttributionWidget(
+                attributions: [
+                  TextSourceAttribution(
+                    'OpenStreetMap contributors',
+                    onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                  ),
+                ],
+              ),
+            ],
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                //userAgentPackageName: 'com.example.app',
+              ),
+              MarkerClusterLayerWidget(options: MarkerClusterLayerOptions(
+                maxClusterRadius: 190,
+                disableClusteringAtZoom: 16,
+                size: Size(50, 50),
+                fitBoundsOptions: FitBoundsOptions(
+                  padding: EdgeInsets.all(50),
+                ),
+                markers: snapshot.data!.map((point) => Marker(
                   point: point,
                   width: 60,
                   height: 60,
-                  builder: (context) =>
-                      Icon(
-                        Icons.pin_drop,
-                        size: 60,
-                        color: Colors.blueAccent,
-                      ),
+                  builder: (context) => Icon(
+                    Icons.pin_drop,
+                    size: 60,
+                    color: Colors.blueAccent,
+                  ),
                 )).toList(),
-            polygonOptions: PolygonOptions(
-                borderColor: Colors.blueAccent,
-                color: Colors.black12,
-                borderStrokeWidth: 3),
-            builder: (context, markers) {
-              return Container(
-                alignment: Alignment.center,
-                decoration:
-                BoxDecoration(color: Color(0xFF1CA8F1), shape: BoxShape.circle),
-                child: Text('${markers.length}'),
-              );
-            },
-          ),)
-        ],
-      );
-    }
+                polygonOptions: PolygonOptions(
+                    borderColor: Colors.blueAccent,
+                    color: Colors.black12,
+                    borderStrokeWidth: 3),
+                builder: (context, markers) {
+                  return Container(
+                    alignment: Alignment.center,
+                    decoration:
+                    BoxDecoration(color: Color(0xFF1CA8F1), shape: BoxShape.circle),
+                    child: Text('${markers.length-1}'),
+                  );
+                },
+              ),)
+            ],
+          );
+        } else {
+          return FlutterMap(
+            mapController: _mController,
+            options: MapOptions(
+              center: LatLng(37.354107, -121.955238),
+              //bounds: LatLngBounds.fromPoints(_latLongList),
+              zoom: 3,
+            ),
+            nonRotatedChildren: [
+              RichAttributionWidget(
+                attributions: [
+                  TextSourceAttribution(
+                    'OpenStreetMap contributors',
+                    onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                  ),
+                ],
+              ),
+            ],
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                //userAgentPackageName: 'com.example.app',
+              ),
+            ],
+          );
+        }
+      },
+    );
   }
 }
