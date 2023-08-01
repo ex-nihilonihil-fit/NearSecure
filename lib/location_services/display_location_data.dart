@@ -22,23 +22,24 @@ class _DisplayLocation extends State<DisplayLocation>  {
   List<LatLng> locations = [LatLng(37.354107, -121.955238)];
   MapController _mController = MapController();
   List<Marker> _markerList = [];
+  List<LatLng> locList = [];
 
   Future<List<LatLng>> getLocation() async {
     // get the data from the database
     List<Map> list = await databaseHelper.queryLoc();
     String data = '';
     List<String> locs = [];
+    locations = [];
     // convert the data to a list of LatLng objects
     for (int i = 0; i < list.length; i++) {
       data = '$data${list[i]}\n';
     }
     locs = data.split('\n');
-    for (int j = 0; j < (locs.length - 1); j++) {
+    for (int j = 0; j < (locs.length-1); j++) {
       List<String> temp = locs[j].split(' ');
       locations.add(LatLng(double.parse(temp[1]), double.parse(temp[2].replaceAll('}', ''))));
     }
 
-    locations.removeAt(0);
     // return the data
     return locations;
   }
@@ -87,8 +88,8 @@ class _DisplayLocation extends State<DisplayLocation>  {
             mapController: _mController,
             options: MapOptions(
               center: snapshot.data![0],
-              bounds: LatLngBounds.fromPoints(snapshot.data!),
-              zoom: 1.0,
+              //bounds: LatLngBounds.fromPoints(snapshot.data!),
+              zoom: 50.0,
             ),
             children: [
               TileLayer(
@@ -123,7 +124,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
                     alignment: Alignment.center,
                     decoration:
                     BoxDecoration(color: Color(0xFF1CA8F1), shape: BoxShape.circle),
-                    child: Text('${markers.length-1}'),
+                    child: Text('${markers.length}'),
                   );
                 },
               ),)
