@@ -118,6 +118,12 @@ class HomePage extends StatelessWidget {
                             onPressed: () {
                               // Listen for NFC signals
                               nfcListener.listen();
+                              showDialog(
+                                context: context,
+                                builder: (context) => const AlertDialog(
+                                  content: Text("NFC Listener Started"),
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -219,6 +225,12 @@ class HomePage extends StatelessWidget {
                           onPressed: () {
                             // Transmit NFC data
                             nfcTransmitter.transmit();
+                            showDialog(
+                                context: context,
+                                builder: (context) => const AlertDialog(
+                              content: Text("NFC Transmitter Started"),
+                            ),
+                            );
                           },
                         ),
                       ),
@@ -321,6 +333,12 @@ class HomePage extends StatelessWidget {
                             nfcListener.stop();
                             // stop transmitting NFC signals
                             nfcTransmitter.stop();
+                            showDialog(
+                                context: context,
+                                builder: (context) => const AlertDialog(
+                              content: Text("NFC Services turned OFF"),
+                            ),
+                            );
                           },
                         ),
                       ),
@@ -633,7 +651,7 @@ class _DisplayLogData extends State<DisplayLogData> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  'images/logo.png',
+                  'images/logs.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -665,7 +683,7 @@ class DisplayLocation extends StatefulWidget {
   _DisplayLocation createState() => _DisplayLocation();
 }
 class _DisplayLocation extends State<DisplayLocation>  {
-  
+
   List<LatLng> locations = [];
   Future<List<LatLng>> getLocation() async {
     // get the data from the database
@@ -697,29 +715,29 @@ class _DisplayLocation extends State<DisplayLocation>  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: FlutterFlowTheme.of(context).lineColor,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110),
-        child: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).lineColor,
-          automaticallyImplyLeading: false,
-          actions: [],
-          flexibleSpace: FlexibleSpaceBar(
-            background: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(2, 5, 2, 0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  'images/logo.png',
-                  fit: BoxFit.cover,
+        backgroundColor: FlutterFlowTheme.of(context).lineColor,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(110),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).lineColor,
+            automaticallyImplyLeading: false,
+            actions: [],
+            flexibleSpace: FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(2, 5, 2, 0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'images/location.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
+            centerTitle: false,
           ),
-          centerTitle: false,
         ),
-      ),
-      body: displayLocationData()
+        body: displayLocationData()
     );
   }
   Widget displayLocationData() {
