@@ -64,6 +64,10 @@ class _DisplayLogData extends State<DisplayLogData> {
     String data = await DatabaseDisplay().getData();
     setState((){
       _logs = data.split('\n');
+      for (int j = 0; j < (_logs.length); j++) {
+        _logs[j] = _logs[j].replaceAll('}', '');
+        _logs[j] = _logs[j].replaceAll('{', '');
+      }
     });
   }
 
