@@ -1,32 +1,24 @@
-# rf_block
+# NearSecure
 
-An app to detect and block RF signals.
+Near Field Communication (NFC) technology has become increasingly prevalent in modern digital devices, enabling seamless data exchange over short distances. While this convenience has transformed various aspects of daily life, it has also exposed users to potential cyber threats. Cybercriminals can exploit NFC vulnerabilities, such as relay attacks, replay attacks, man-in-the-middle (MITM) attacks, eavesdropping, and using NFC as a steppingstone for further hacking and malware activities. Such attacks can compromise users' privacy, track their movements, steal personal information (PII), and even take control of their devices.
 
-## Some Notes About Flutter
+Sophisticated cyber actors have historically utilized NFC to target and compromise specific individuals, leading to the theft of sensitive content and location data from their smart devices. To counter these threats and protect users from surveillance and unauthorized access, we propose the development of a solution that effectively mitigates NFC-related attacks while also exposing the unethical behavior of cybercriminals.
 
-Flutter compiles code for both iOS and Android, so it's conventions are a little 
-different than other apps. Some things to note:
+## Our Solution
+Our innovative application, "NearSecure," is designed to safeguard user privacy and prevent NFC-related attacks. By continuously scanning and logging NFC signals, it identifies and blocks potential attacks aimed at tracking users or stealing their PII. The NearSecure App operates seamlessly in the background of a user's smartphone, ensuring uninterrupted protection without compromising device performance.
 
-- Most of the relevant code is in the "lib" folder. Trying to change code directly 
-in the android or iOS folders will probably result in compile errors.
+Below are our application's key features:
 
-- The first page of the app is represented in the main.dart file. 
+* Real-Time NFC Monitoring: NearSecure scans for and records NFC signals to detect any malicious activity that might compromise user security and privacy.
 
-- The best way to add dependencies is to call "flutter install <dependency name>"
-in the terminal, which will then allow you to call it for your methods and classes. 
+* Attack Mitigation: When an unwanted RFID signal is detected, NearSecure thwarts the attack, preventing unauthorized access and data theft.
 
-- It's important to check the dependency documentation at [pub.dev](https://pub.dev). 
-Many dependencies require changes to the application manifest and .plist files to work.
+* Untraceable Random Data Transmission: As an additional layer of defense, NearSecure acts as an RFID tag that transmits random and unreadable data alongside legitimate NFC signals. This confuses adversaries' RFID readers and prevents them from obtaining sensitive information.
 
-## Getting Started
+* Location Mapping: NearSecure provides users with a visual representation of detected NFC attacks on a map, allowing them to understand the scope and patterns of potential threats.
 
-This project is a starting point for a Flutter application.
+* Privacy-Focused: NearSecure upholds the utmost commitment to user privacy, as it collects no personal data, ensuring that users' information remains secure and confidential.
 
-A few resources to get you started if this is your first Flutter project:
+* User-Friendly Interface: The NearSecure App boasts a simple and intuitive user interface, making it accessible to users of all levels of technical expertise.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Your security is where it belongs - in your hands.  We can make no guarantees to your data's securitym but our goal is to empower users with a robust defense against NFC-related cyber threats without compromising their privacy. By actively countering surveillance attempts and providing valuable insights into cybercriminal activity, NearSecure aims to create a safer digital environment for all users.
