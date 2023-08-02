@@ -66,18 +66,18 @@ class HomePage extends StatelessWidget {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.vertical,
             children: [
-
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(5, 10, 5, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(5, 10, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 105,
+                  width: 390,
+                  height: 92,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
                         blurRadius: 4,
                         color: Color(0x33000000),
@@ -87,42 +87,38 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                     shape: BoxShape.rectangle,
                   ),
-                  alignment: const AlignmentDirectional(0, 0),
+                  alignment: AlignmentDirectional(0, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 5, 0),
-                          child: FlutterFlowIconButton(
-                            borderColor: Color(0xFF21DC75),
-                            borderRadius: 22,
-                            borderWidth: 1,
-                            buttonSize: 50,
-                            fillColor: Color(0xFF21DC75),
-                            icon: Icon(
-                              Icons.rss_feed,
-                              color: FlutterFlowTheme.of(context).primaryBtnText,
-                              size: 26,
-                            ),
-                            //showLoadingIndicator: true,
-                            onPressed: () {
-                              // Listen for NFC signals
-                              nfcListener.listen();
-                              showDialog(
-                                context: context,
-                                builder: (context) => const AlertDialog(
-                                  content: Text("NFC Listener Started"),
-                                ),
-                              );
-                            },
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 5, 0),
+                        child: FlutterFlowIconButton(
+                          borderColor: Color(0xFF21DC75),
+                          borderRadius: 22,
+                          borderWidth: 1,
+                          buttonSize: 50,
+                          fillColor: Color(0xFF21DC75),
+                          icon: Icon(
+                            Icons.rss_feed,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            size: 26,
                           ),
+
+                          onPressed: () {
+                            // Listen for NFC signals
+                            nfcListener.listen();
+                            showDialog(
+                              context: context,
+                              builder: (context) => const AlertDialog(
+                                content: Text("NFC Listener Started"),
+                              ),
+                            );
+                          },
                         ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
@@ -184,8 +180,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 105,
+                  width: 390,
+                  height: 92,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -211,24 +207,23 @@ class HomePage extends StatelessWidget {
                           fillColor: Color(0xFFEA0C0C),
                           icon: Icon(
                             Icons.block,
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                            color: FlutterFlowTheme.of(context).alternate,
                             size: 26,
                           ),
                           onPressed: () {
                             // Transmit NFC data
                             nfcTransmitter.transmit();
                             showDialog(
-                                context: context,
-                                builder: (context) => const AlertDialog(
-                              content: Text("NFC Transmitter Started"),
-                            ),
+                              context: context,
+                              builder: (context) => const AlertDialog(
+                                content: Text("NFC Transmitter Started"),
+                              ),
                             );
                           },
                         ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
@@ -290,8 +285,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 105,
+                  width: 390,
+                  height: 92,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -317,7 +312,7 @@ class HomePage extends StatelessWidget {
                           fillColor: Colors.orange,
                           icon: Icon(
                             Icons.stop_rounded,
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                            color: FlutterFlowTheme.of(context).alternate,
                             size: 26,
                           ),
                           onPressed: () {
@@ -326,24 +321,23 @@ class HomePage extends StatelessWidget {
                             // stop transmitting NFC signals
                             nfcTransmitter.stop();
                             showDialog(
-                                context: context,
-                                builder: (context) => const AlertDialog(
-                              content: Text("NFC Services turned OFF"),
-                            ),
+                              context: context,
+                              builder: (context) => const AlertDialog(
+                                content: Text("NFC Services turned OFF"),
+                              ),
                             );
                           },
                         ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
                             child: Container(
                               width: 112,
-                              height: 55,
+                              height: 50,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -356,7 +350,7 @@ class HomePage extends StatelessWidget {
                                   child: Text(
                                     'NFC OFF',
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodyText1
                                         .override(
                                       fontFamily: 'Outfit',
                                       color: Colors.orange,
@@ -375,16 +369,19 @@ class HomePage extends StatelessWidget {
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(1, -1),
-                              child: Text(
-                                'Turn off NFC Services',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                  fontFamily: 'Outfit',
-                                  color:
-                                  Colors.orange,
-                                  fontSize: 15,
+                              alignment: AlignmentDirectional(0, -1),
+                              child: Padding(
+                                padding:
+                                EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                                child: Text(
+                                  'Turn off NFC Services',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                    fontFamily: 'Outfit',
+                                    color: Colors.orange,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ),
                             ),
@@ -398,8 +395,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 105,
+                  width: 390,
+                  height: 92,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -425,7 +422,7 @@ class HomePage extends StatelessWidget {
                           fillColor: Color(0xFFD21CF1),
                           icon: Icon(
                             Icons.location_on,
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                            color: FlutterFlowTheme.of(context).alternate,
                             size: 26,
                           ),
                           onPressed: () async {
@@ -436,7 +433,6 @@ class HomePage extends StatelessWidget {
                               // navigate to the DisplayLocationData view
                               Navigator.push(context, MaterialPageRoute(builder: (context) =>  DisplayLocation()));
                             }
-
                           },
                         ),
                       ),
@@ -447,13 +443,13 @@ class HomePage extends StatelessWidget {
                         children: [
                           Container(
                             width: 168,
-                            height: 55,
+                            height: 50,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0, 1),
+                              alignment: AlignmentDirectional(-1, 1),
                               child: Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(13, 0, 0, 0),
@@ -504,8 +500,8 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
-                  width: 400,
-                  height: 105,
+                  width: 390,
+                  height: 92,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -530,33 +526,28 @@ class HomePage extends StatelessWidget {
                           fillColor: FlutterFlowTheme.of(context).warning,
                           icon: Icon(
                             Icons.text_snippet_rounded,
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                            color: FlutterFlowTheme.of(context).alternate,
                             size: 26,
                           ),
                           onPressed: () {
-
                             Navigator.push(context, MaterialPageRoute(builder: (context) =>  DisplayLogData()));
-
                           },
                         ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 110,
-                            height: 59,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(-1,1),
-                              child: Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(17, 0, 0, 0),
+                          Align(
+                            alignment: AlignmentDirectional(-1, -1),
+                            child: Container(
+                              width: 110,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(-1, 1),
                                 child: Text(
                                   'Logs',
                                   style: FlutterFlowTheme.of(context)
@@ -565,7 +556,7 @@ class HomePage extends StatelessWidget {
                                     fontFamily: 'Outfit',
                                     color: FlutterFlowTheme.of(context)
                                         .warning,
-                                    fontSize: 24,
+                                    fontSize: 22,
                                   ),
                                 ),
                               ),
@@ -573,16 +564,16 @@ class HomePage extends StatelessWidget {
                           ),
                           Container(
                             width: 150,
-                            height: 25,
+                            height: 17,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(-1,1),
+                              alignment: AlignmentDirectional(-1, 1),
                               child: Padding(
                                 padding:
-                                EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
                                 child: Text(
                                   'Display of Data',
                                   style: FlutterFlowTheme.of(context)
@@ -610,4 +601,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
