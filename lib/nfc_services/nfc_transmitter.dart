@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:ndef/ndef.dart' as ndef;
 import 'package:rf_block/nfc_services/random_data.dart';
@@ -27,7 +28,15 @@ class NFCTransmitter {
     // if a tag is found, write random data to it
     var randomNumber = RandomData().getRandom32Bits();
     // write the random string to the tag
-    await FlutterNfcKit.writeNDEFRecords([ndef.UriRecord.fromString(randomNumber.toString())]);
+    //await FlutterNfcKit.writeNDEFRecords([ndef.UriRecord.fromString(randomNumber.toString())]);
+    // handle the PlatformException error since the tag isn't formatted and the write will fail
+    try {
+      await FlutterNfcKit.writeNDEFRecords([ndef.UriRecord.fromString(randomNumber.toString())]);
+    } on PlatformException catch (e) {
+      print('Error: $e'); //TODO: Remove this line
+    }
+
+
     print('random number: $randomNumber written to tag'); //TODO: Remove this line
 
     // get the current location
