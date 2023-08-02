@@ -5,7 +5,7 @@ Near Field Communication (NFC) technology has become increasingly prevalent in m
 Sophisticated cyber actors have historically utilized NFC to target and compromise specific individuals, leading to the theft of sensitive content and location data from their smart devices. To counter these threats and protect users from surveillance and unauthorized access, we propose the development of a solution that effectively mitigates NFC-related attacks while also exposing the unethical behavior of cybercriminals.
 
 ## Our Solution
-Our innovative application, "NearSecure," is designed to safeguard user privacy and prevent NFC-related attacks. By continuously scanning and logging NFC signals, it identifies and blocks potential attacks aimed at tracking users or stealing their PII. The NearSecure App operates seamlessly in the background of a user's smartphone, ensuring uninterrupted protection without compromising device performance.
+Our application is designed to safeguard user privacy and prevent NFC-related attacks. By continuously scanning and logging NFC signals, it identifies and blocks potential attacks aimed at tracking users or stealing their PII. The NearSecure App operates seamlessly in the background of a user's smartphone, ensuring uninterrupted protection without compromising device performance.
 
 Below are our application's key features:
 
