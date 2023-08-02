@@ -11,7 +11,7 @@ This app gets updated sometimes, maybe.  We made it for a class, so don't expect
 
 ## Reporting a Vulnerability
 
-If you find a vunerability, please submit a change.  We'll check it out.  
+If you find a vunerability, please suggest a change.  We'll check it out.  
 
 ## Make it better
 
