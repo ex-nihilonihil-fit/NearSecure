@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:rf_block/database_services/database_helper.dart';
 import 'package:rf_block/location_services/location_data.dart';
 import 'dart:async';
+
+import '../main.dart';
 
 class NFCListener {
 // start an asynchronous session to listen for NFC tags
@@ -19,7 +22,7 @@ class NFCListener {
     var tag = await FlutterNfcKit.poll(timeout: Duration(seconds: 240));
     var id = tag.id;
     print('NFC ID: $id'); //TODO: Remove this line
-    var nfcData = '${tag.type}, ${tag.sak}, ${tag.atqa}';
+    var nfcData = '${tag.type} ${tag.sak} ${tag.atqa}';
     print('NFC Data: $nfcData'); //TODO: Remove this line
 
     // get the current location

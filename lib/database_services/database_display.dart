@@ -1,5 +1,6 @@
 import 'package:latlng/latlng.dart';
-
+import 'package:rf_block/main.dart';
+import 'package:rf_block/nfc_services/nfc_transmitter.dart';
 import 'database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:rf_block/flutter_flow/flutter_flow_theme.dart';
@@ -46,11 +47,12 @@ class DatabaseDisplay {
 }
 
 class DisplayLogData extends StatefulWidget {
-  DisplayLogData({Key? key}) : super(key: key);
+  const DisplayLogData({Key? key}) : super(key: key);
 
   @override
   State<DisplayLogData> createState() => _DisplayLogData();
 }
+
 class _DisplayLogData extends State<DisplayLogData> {
 
   List<String> _logs = [];
@@ -83,7 +85,7 @@ class _DisplayLogData extends State<DisplayLogData> {
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
             background: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(2, 5, 2, 0),
+              padding: const EdgeInsetsDirectional.fromSTEB(2, 5, 2, 0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
@@ -96,7 +98,25 @@ class _DisplayLogData extends State<DisplayLogData> {
           centerTitle: false,
         ),
       ),
-      body: _logs==null ? Container():ListView.builder(
+
+        // create a button to clear the log data
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await DatabaseHelper().delete();
+            _updateLog();
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+            // stop the NFC transmitter
+            NFCTransmitter().stop();
+            },
+          elevation: 8,
+          child: const Icon(
+            Icons.delete,
+            color: Color(0xFFFFFFFF),
+            size: 24,
+          ),
+        ),
+
+    body: _logs==null ? Container():ListView.builder(
         itemCount: _logs.length,
         itemBuilder: (_, int position) {
           return Card(

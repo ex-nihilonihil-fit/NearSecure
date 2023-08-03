@@ -19,10 +19,10 @@ class NFCTransmitter {
       print('NFC Transmitter started'); //TODO: Remove this line
     }
     // listen for any tag and get the tag data when it's tapped.
-    var tag = await FlutterNfcKit.poll(timeout: Duration(seconds: 240));
+    var tag = await FlutterNfcKit.poll(timeout: const Duration(seconds: 240));
     var id = tag.id;
     print('NFC ID: $id'); //TODO: Remove this line
-    var nfcData = '${tag.type}, ${tag.sak}, ${tag.atqa}';
+    var nfcData = '${tag.type} ${tag.sak} ${tag.atqa}';
     print('NFC Data: $nfcData'); //TODO: Remove this line
 
     // if a tag is found, write random data to it
@@ -48,7 +48,7 @@ class NFCTransmitter {
     print('time: $time'); //TODO: Remove this line
 
     // Write the data to the database.
-    DatabaseHelper().insert(time, id, nfcData, location);
+    DatabaseHelper().insert(time.replaceAll(' ', '@'), id, nfcData.replaceAll(',', ''), location.replaceAll(',', ''));
   }
 
   // close the session
