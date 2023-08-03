@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
         backgroundColor: FlutterFlowTheme.of(context).lineColor,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150),
+          preferredSize: const Size.fromHeight(150),
           child: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).lineColor,
             automaticallyImplyLeading: false,
@@ -165,7 +165,7 @@ class HomePage extends StatelessWidget {
                                       .bodyText2
                                       .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFF21DC75),
+                                    color: const Color(0xFF21DC75),
                                     fontSize: 15,
                                   ),
                                 ),
@@ -285,7 +285,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 390,
                   height: 92,
@@ -336,7 +336,7 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
                             child: Container(
                               width: 112,
                               height: 50,
@@ -345,7 +345,7 @@ class HomePage extends StatelessWidget {
                                     .secondaryBackground,
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(1, 1),
+                                alignment: const AlignmentDirectional(1, 1),
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       5, 10, 0, 0),
@@ -371,10 +371,10 @@ class HomePage extends StatelessWidget {
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0, -1),
+                              alignment: const AlignmentDirectional(0, -1),
                               child: Padding(
                                 padding:
-                                EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                                const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                                 child: Text(
                                   'Turn off NFC Services',
                                   style: FlutterFlowTheme.of(context)
@@ -395,7 +395,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
                 child: Container(
                   width: 390,
                   height: 92,
@@ -410,18 +410,18 @@ class HomePage extends StatelessWidget {
                     ],
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  alignment: AlignmentDirectional(0, 0),
+                  alignment: const AlignmentDirectional(0, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 5, 0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 5, 0),
                         child: FlutterFlowIconButton(
-                          borderColor: Color(0xFFD21CF1),
+                          borderColor: const Color(0xFFD21CF1),
                           borderRadius: 22,
                           borderWidth: 1,
                           buttonSize: 50,
-                          fillColor: Color(0xFFD21CF1),
+                          fillColor: const Color(0xFFD21CF1),
                           icon: const Icon(
                             Icons.location_on,
                             color: Color(0xFFFFFFFF),
@@ -532,7 +532,7 @@ class HomePage extends StatelessWidget {
                             size: 26,
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  DisplayLogData()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  const DisplayLogData()));
                           },
                         ),
                       ),
