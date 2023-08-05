@@ -6,7 +6,7 @@ This app gets updated sometimes, maybe.  We made it for a class, so don't expect
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | 🤷
+| 1.2.x   | 🤷
 
 
 ## Reporting a Vulnerability
