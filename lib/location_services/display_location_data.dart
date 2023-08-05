@@ -88,7 +88,7 @@ class _DisplayLocation extends State<DisplayLocation>  {
             mapController: _mController,
             options: MapOptions(
               center: snapshot.data![0],
-              //bounds: LatLngBounds.fromPoints(snapshot.data!),
+              bounds: LatLngBounds.fromPoints(snapshot.data!),
               zoom: 3.0,
             ),
             children: [
