@@ -21,4 +21,4 @@ Below are our application's key features:
 
 * User-Friendly Interface: The NearSecure App boasts a simple and intuitive user interface, making it accessible to users of all levels of technical expertise.
 
-Your security is where it belongs - in your hands.  We can make no guarantees to your data's securitym but our goal is to empower users with a robust defense against NFC-related cyber threats without compromising their privacy. By actively countering surveillance attempts and providing valuable insights into cybercriminal activity, NearSecure aims to create a safer digital environment for all users.
+Your security is where it belongs - in your hands.  We can make no guarantees to your data's security but our goal is to empower users with a robust defense against NFC-related cyber threats without compromising their privacy. By actively countering surveillance attempts and providing valuable insights into cybercriminal activity, NearSecure aims to create a safer digital environment for all users.
